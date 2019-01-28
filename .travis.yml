@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t gcetin/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run gcetin/react-test npm test -- --covarage
+
+after_success:
+  - docker build -t gcetin/multi-client ./client
+  - docker build -t gcetin/multi-nginx ./nginx
+  - docker build -t gcetin/multi-server ./server
+  - docker build -t gcetin/multi-worker ./worker
+  # log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin 
+  # take those images and push them to docker hub
+  - docker push gcetin/multi-client
+  - docker push gcetin/multi-nginx
+  - docker push gcetin/multi-server
+  - docker push gcetin/multi-worker
