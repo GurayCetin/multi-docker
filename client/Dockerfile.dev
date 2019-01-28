@@ -1,6 +1,4 @@
 FROM node:alpine
-ENV http_proxy http://135.245.192.7:8000
-ENV https_proxy http://135.245.192.7:8000
 WORKDIR /app
 COPY ./package.json ./
 RUN npm install
