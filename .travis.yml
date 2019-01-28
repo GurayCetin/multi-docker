@@ -6,7 +6,7 @@ before_install:
   - docker build -t gcetin/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run gcetin/react-test npm test -- --covarage
+  - docker run gcetin/react-test npm test -- --coverage
 
 after_success:
   - docker build -t gcetin/multi-client ./client
