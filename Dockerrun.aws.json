@@ -3,7 +3,8 @@
     "containerDefinitions": [
         {
             "name": "client",
-            "image": "gcetin/multi-client"
+            "image": "gcetin/multi-client",
+            "hostname": "client"
         }
     ]
 
